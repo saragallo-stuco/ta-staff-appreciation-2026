@@ -1,0 +1,3 @@
+# This file exists so Git tracks the otherwise empty `tickets/` folder.
+# Drop daily ticket photos here, then reference them from index.html as
+# `tickets/day3-trivia.jpg` (etc.) in the ticketImage field.
