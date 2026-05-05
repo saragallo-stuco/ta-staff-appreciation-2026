@@ -18,22 +18,27 @@
     dayNumber: 2,
     date: "Tuesday, May 5",
 
-    todayBlurb: `Today's mystery staffer punched their first time card at <strong>Funtown</strong> — a very Maine origin story — but their path took some unexpected turns from there. Their 20s included a stint at <strong>pastry school in San Francisco</strong>, and by their 30s they'd swapped the kitchen for a backpack and spent <strong>five months traveling solo through India and Southeast Asia</strong> (one of about <strong>25 countries</strong> they've visited).<br><br>They grew up dreaming of being an actor, with <strong>New Kids on the Block</strong> as the soundtrack, and even had a brush with Hollywood right here at home — they once crossed paths with <strong>Judd Nelson</strong> at the <strong>Portland Jetport</strong>, where he was waiting for <strong>Brooke Shields</strong> to land.<br><br>These days, life is quieter: a chocolate lab named <strong>Luna</strong>, and parallel parking skills so sharp they're probably the only person on campus who actually <em>enjoys</em> the construction-zone parking situation. And if you've ever needed someone to talk to, schedule a class, or sort out a tough week — you may have already found their office.`,
+    // Today's clue. HTML allowed — use <strong>...</strong> for bold,
+    // <em>...</em> for italic, <br><br> for paragraph breaks.
+    todayBlurb: `Today's mystery teacher believes every old object has a story worth telling. She watches <strong>Antique Roadshow</strong> alone on quiet nights, completely content, and once spent a weekend on a tiny powerless island off Peaks Island just to fall asleep to fog horns and ocean waves.<br><br>She has a few stories of her own. There's a family photo of her <strong>touching Sting's foot</strong> at a Police concert — he saw her hand reaching up and wiggled his foot down for her. Her childhood dream was to inherit <strong>Belle's library from <em>Beauty and the Beast</em></strong>. Her best friend these days is a black lab named <strong>Reggie</strong>.<br><br>If you've spent any time in her classroom, you've probably noticed something: she has a knack for making the past feel close — and not the least bit dusty.`,
 
     submitLink: "https://forms.google.com/REPLACE-WITH-YOUR-FORM-LINK",
     deadline: "by 2:00 PM today",
 
+    // Photo paths point to filenames inside the photos/ folder.
+    // Convention: first initial + last initial, e.g. "MR.jpg" for Mr. Rodriguez.
+    // Leave teacherPhoto as "" to show a placeholder instead.
     yesterdayTrivia: {
-      revealedTeacher: "Mr. Rodriguez",
-      winnerName: "Jane Doe",
-      winnerGrade: "Grade 11",
-      ticketImage: ""
+      revealedTeacher: "Mrs. Serrano",
+      teacherPhoto: "MS.jpeg",
+      winnerName: "Lien Nguyen",
+      winnerGrade: "Grade 12"
     },
 
     yesterdayRaffle: {
-      teacherWinner: "Ms. Lambert",
-      prizeWon: "$50 Batson River Voucher",
-      ticketImage: ""
+      teacherWinner: "Mr. Temkiewicz",
+      teacherPhoto: "MT.jpg",
+      prizeWon: "TBD"
     }
   };
 </script>
@@ -909,7 +914,7 @@
 </div>
 
 <script>
-  (function() {
+(function() {
     document.getElementById('day-num').textContent = CONFIG.dayNumber;
     document.getElementById('day-big').textContent = String(CONFIG.dayNumber).padStart(2, '0');
     document.getElementById('date-line').textContent = CONFIG.date;
@@ -924,12 +929,12 @@
     document.getElementById('raffle-teacher').textContent = CONFIG.yesterdayRaffle.teacherWinner;
     document.getElementById('raffle-prize').textContent = CONFIG.yesterdayRaffle.prizeWon;
 
-    function renderTicket(containerId, src, alt, placeholderText) {
+    function renderPhoto(containerId, filename, alt, placeholderText) {
       const tc = document.getElementById(containerId);
-      if (src && src.trim() !== '') {
+      if (filename && filename.trim() !== '') {
         const img = document.createElement('img');
         img.className = 'ticket-image';
-        img.src = src;
+        img.src = `photos/${filename}`;
         img.alt = alt;
         tc.appendChild(img);
       } else {
@@ -944,14 +949,14 @@
           </div>`;
       }
     }
-    renderTicket('trivia-ticket-container',
-                 CONFIG.yesterdayTrivia.ticketImage,
-                 "Yesterday's winning trivia ticket",
-                 "Photo of the winning trivia ticket goes here.");
-    renderTicket('raffle-ticket-container',
-                 CONFIG.yesterdayRaffle.ticketImage,
-                 "Yesterday's winning raffle ticket",
-                 "Photo of the winning raffle ticket goes here.");
+    renderPhoto('trivia-ticket-container',
+                CONFIG.yesterdayTrivia.teacherPhoto,
+                "Photo of " + CONFIG.yesterdayTrivia.revealedTeacher,
+                "Photo of the revealed teacher goes here.");
+    renderPhoto('raffle-ticket-container',
+                CONFIG.yesterdayRaffle.teacherPhoto,
+                "Photo of " + CONFIG.yesterdayRaffle.teacherWinner,
+                "Photo of the raffle winner goes here.");
   })();
 </script>
 
